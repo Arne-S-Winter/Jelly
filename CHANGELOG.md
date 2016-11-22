@@ -1,3 +1,10 @@
+## 1.0.1 
+
+New Animations
+    
+  - a new ShiftAnimation can be used to animate 
+  - Slide In and FadeIn now have a alignement options (vertical,horizontal) 
+
 ## 1.0.1 (2016-11-20)
 
 Minor Version update:

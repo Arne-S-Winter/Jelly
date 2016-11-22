@@ -45,6 +45,8 @@ extension JellyAnimator: UIViewControllerTransitioningDelegate {
                 return SlideInPresentationAnimator(direction: presentation.directionShow, presentationType: .show, presentation: presentation)
             } else if let presentation = self.presentation as? JellyFadeInPresentation {
                 return FadeInPresentationAnimator(presentationType: .show, presentation: presentation)
+            } else if let presentation = self.presentation as? JellyShiftPresentation {
+                return ShiftInPresentationAnimator(direction: .bottom, presentationType: .show, presentation: presentation)
             } else {
                 return nil
             }
@@ -56,7 +58,9 @@ extension JellyAnimator: UIViewControllerTransitioningDelegate {
                 return SlideInPresentationAnimator(direction: presentation.directionDismiss, presentationType: .dismiss, presentation: presentation)
             } else if let presentation = self.presentation as? JellyFadeInPresentation {
                 return FadeInPresentationAnimator(presentationType: .dismiss, presentation: presentation)
-            } else {
+            } else if let presentation = self.presentation as? JellyShiftPresentation {
+                return ShiftInPresentationAnimator(direction: .bottom, presentationType: .dismiss, presentation: presentation)
+            }else {
                 return nil
             }
     }
@@ -64,22 +68,7 @@ extension JellyAnimator: UIViewControllerTransitioningDelegate {
 
 extension JellyAnimator: UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
+        // TODO
         return nil
-        /*
-        switch  operation {
-        case .push:
-            switch self.presentation.style {
-            case .slidein:
-                 return SlideInPresentationAnimator(direction: presentation.directionShow, presentationType: .show, presentation: presentation)
-            }
-        case .pop:
-            switch self.presentation.style {
-            case .slidein:
-                 return SlideInPresentationAnimator(direction: presentation.directionDismiss, presentationType: .dismiss, presentation: presentation)
-            }
-        default:
-            return nil
-        }*/
     }
 }

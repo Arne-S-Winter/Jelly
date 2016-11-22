@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct JellyFadeInPresentation: JellyPresentation {
+public struct JellyFadeInPresentation: JellyPresentation, NonFullscreenJellyPresentation {
     
     // Jelly Presentation Protocol conformance
     public private(set) var dismissCurve: JellyConstants.JellyCurve = .linear

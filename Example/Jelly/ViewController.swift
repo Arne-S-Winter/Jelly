@@ -28,11 +28,14 @@ class ViewController: UIViewController {
         
         let customCornerDirectionSlideIn = DataObject(presentation: JellySlideInPresentation(cornerRadius: 15,backgroundStyle: .blur(effectStyle: .dark), jellyness: .jellier, duration: .medium, directionShow: .left, directionDismiss: .right), titleDescription: "Blurred Slide in Custom Direction", detailDescription: "custom corner radius, directions and jelliness")
         
+        let customShiftInPresentation = DataObject(presentation: JellyShiftPresentation(), titleDescription: "Shift", detailDescription: "shit")
+        
         data.append(defaultFadeInPresentation)
         data.append(defaultSlideInPresentation)
         data.append(customBlurFadeIn)
         data.append(customBlurSlideIn)
         data.append(customCornerDirectionSlideIn)
+        data.append(customShiftInPresentation)
         
         return data
     }()

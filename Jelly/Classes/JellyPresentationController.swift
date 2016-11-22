@@ -13,7 +13,10 @@ class JellyPresentationController : UIPresentationController {
     init(presentedViewController: UIViewController, presentingViewController: UIViewController?, presentation: JellyPresentation) {
         
         presentedViewController.view.layer.masksToBounds = true
-        presentedViewController.view.layer.cornerRadius = CGFloat(presentation.cornerRadius)
+        
+        if let presentation = presentation as? NonFullscreenJellyPresentation {
+            presentedViewController.view.layer.cornerRadius = CGFloat(presentation.cornerRadius)
+        }
         
         self.presentation = presentation
         super.init(presentedViewController: presentedViewController,
@@ -26,13 +29,15 @@ class JellyPresentationController : UIPresentationController {
     
     /// Presentation and Dismissal stuff
     override func presentationTransitionWillBegin() {
-        switch presentation.backgroundStyle {
-        case .blur(let effectStyle):
-            animateBlurView(effectStyle: effectStyle)
-        case .dimmed:
-            animateDimmingView()
-        case .none:
-            ()
+        if let nonFullPresentation = presentation as? NonFullscreenJellyPresentation {
+            switch nonFullPresentation.backgroundStyle {
+            case .blur(let effectStyle):
+                animateBlurView(effectStyle: effectStyle)
+            case .dimmed:
+                animateDimmingView()
+            case .none:
+                ()
+            }
         }
     }
     
@@ -97,7 +102,11 @@ class JellyPresentationController : UIPresentationController {
     
     override func size(forChildContentContainer container: UIContentContainer,
                        withParentContainerSize parentSize: CGSize) -> CGSize {
-        return self.presentation.sizeForViewController
+        if let presentation = presentation as? NonFullscreenJellyPresentation {
+            return presentation.sizeForViewController
+        } else {
+            return parentSize
+        }
     }
     
     override var frameOfPresentedViewInContainerView: CGRect {
